@@ -31,15 +31,18 @@ class Request
             $options = $options + \nSolutions\Request::$default_options;
         
         $request = curl_init(\nSolutions\Filmweb::API_SERVER.http_build_query($params));
+        print_r($request);
 
         if ( ! curl_setopt_array($request, $options))
                 throw new \Exception('Failed to set CURL options, check CURL documentation: http://php.net/curl_setopt_array');
         
         $response = curl_exec($request);
+        print_r($response);
         curl_close($request);
 
         if(substr($response, 0, 2) !== 'ok')
         {
+            print_r($response);
             throw new \Exception('Nie otrzymano odpowiedzi');
         }
         
